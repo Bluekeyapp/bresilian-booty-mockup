@@ -65,7 +65,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* header */
 header.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-header.top img{height:62px;width:auto}
+/* logo drawn at 2x; negative margins trim the PNG's transparent padding so the header keeps its 62px height and left edge */
+header.top img{height:124px;width:auto;margin:-31px 0 -31px -13px}
 header.top nav{display:flex;gap:26px;font-weight:500;font-size:15px}
 header.top nav a{text-decoration:none}
 header.top nav a:hover{color:var(--cherry)}
