@@ -67,6 +67,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 header.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
 /* logo drawn at 2x; negative margins trim the PNG's transparent padding so the header keeps its 62px height and left edge */
 header.top img{height:124px;width:auto;margin:-31px 0 -31px -13px}
+header.top .home{display:block;border-radius:14px;transition:transform .15s}
+header.top .home:hover{transform:scale(1.04)}
+header.top .home:active{transform:scale(.96)}
 header.top nav{display:flex;align-items:center;gap:26px;font-weight:500;font-size:15px}
 header.top nav a{text-decoration:none}
 header.top nav a:hover{color:var(--cherry)}
@@ -265,7 +268,7 @@ footer.site .legal a{text-underline-offset:3px}
 
 <div class="wrap">
   <header class="top">
-    <img src="img/logo.png" alt="Bresilian Booty">
+    <a href="./" class="home" id="home" aria-label="Bresilian Booty, revenir en haut et recharger la page"><img src="img/logo.png" alt="Bresilian Booty"></a>
     <nav aria-label="Navigation">
       <a href="#resultats">Résultats</a>
       <a href="#programme">Le programme</a>
@@ -549,6 +552,14 @@ footer.site .legal a{text-underline-offset:3px}
 <script>
 const $ = s => document.querySelector(s);
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2200)}
+
+/* logo: back to the top and reload (without restoring the old scroll position or #anchor) */
+try{history.scrollRestoration='manual'}catch(e){}
+$('#home').onclick=e=>{
+  e.preventDefault();
+  scrollTo({top:0,behavior:'instant'});
+  location.replace(location.pathname+location.search);
+};
 
 /* countdown to end of the current month */
 (function(){
